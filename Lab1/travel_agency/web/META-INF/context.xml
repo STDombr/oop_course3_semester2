@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Context>
+    <Resource name="jdbc/travel_agency"
+              auth="Container"
+              type="javax.sql.DataSource"
+              username="postgres"
+              password="0000"
+              driverClassName="org.postgresql.Driver"
+              url="jdbc:postgresql://localhost:5432/travel_agency"
+              maxActive="15"
+              maxIdle="3"/>
+
+</Context>
