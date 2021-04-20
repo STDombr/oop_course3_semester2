@@ -31,8 +31,12 @@ public class Converter {
                 .setPrice(resultSet.getFloat("price"))
                 .setDays(resultSet.getInt("days"))
                 .setInfo(resultSet.getString("info"))
-                .setSale(resultSet.getBoolean("sale"))
+                .setSale(resultSet.getInt("sale"))
                 .build();
+    }
+
+    public static Float getMoneyFromResultSet(ResultSet resultSet) throws SQLException {
+        return resultSet.getFloat("money");
     }
 
     public static Country getCountryFromResultSet(ResultSet resultSet) throws SQLException {
