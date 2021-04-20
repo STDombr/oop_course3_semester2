@@ -52,4 +52,39 @@ public class TourDAO {
         return list;
     }
 
+    public Tour getTourById(int id, List<TourType> tourTypes, List<Country> countries) {
+        Tour tour = new Tour();
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(resourceBundle.getString("tours.get_tour_by_id"), Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setInt(1, id);
+
+            String tourTypeName = "";
+            String countryName = "";
+
+            ResultSet result = preparedStatement.executeQuery();
+            if (result.next()) {
+                for (TourType tourType : tourTypes) {
+                    if (tourType.getId() == result.getInt("tour_type")) {
+                        tourTypeName = tourType.getName();
+                    }
+                }
+
+                for (Country country : countries) {
+                    if (country.getId() == result.getInt("country")) {
+                        countryName = country.getName();
+                    }
+                }
+
+                tour = Converter.getTourFromResultSet(result);
+                tour.setCountry(countryName);
+                tour.setTourType(tourTypeName);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return tour;
+    }
+
 }

@@ -8,7 +8,7 @@ public class Tour {
     private String country;
     private int days;
     private String info;
-    private boolean sale;
+    private int sale;
 
     public Tour() {
         this.id = -1;
@@ -18,10 +18,10 @@ public class Tour {
         this.country = "";
         this.days = 0;
         this.info = "";
-        this.sale = false;
+        this.sale = 0;
     }
 
-    public Tour(int id, String tourType, String name, float price, String country, int days, String info, boolean sale) {
+    public Tour(int id, String tourType, String name, float price, String country, int days, String info, int sale) {
         this.id = id;
         this.tourType = tourType;
         this.name = name;
@@ -88,11 +88,11 @@ public class Tour {
         this.info = info;
     }
 
-    public boolean isSale() {
+    public int getSale() {
         return sale;
     }
 
-    public void setSale(boolean sale) {
+    public void setSale(int sale) {
         this.sale = sale;
     }
 
@@ -106,7 +106,7 @@ public class Tour {
                 ", country='" + country + '\'' +
                 ", days=" + days +
                 ", info='" + info + '\'' +
-                ", sale=" + sale +
+                ", sale=" + sale + "%" +
                 '}';
     }
 }

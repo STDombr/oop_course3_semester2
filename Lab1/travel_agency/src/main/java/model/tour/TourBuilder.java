@@ -10,7 +10,7 @@ public class TourBuilder {
     private String country;
     private int days;
     private String info;
-    private boolean sale;
+    private int sale;
 
     public TourBuilder setId(int id) {
         this.id = id;
@@ -47,7 +47,7 @@ public class TourBuilder {
         return this;
     }
 
-    public TourBuilder setSale(boolean sale) {
+    public TourBuilder setSale(int sale) {
         this.sale = sale;
         return this;
     }
