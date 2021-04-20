@@ -22,7 +22,7 @@ public class UserService {
             session.setAttribute("user", user);
             return true;
         } else {
-            session.setAttribute("loginErrorMessage", "Invalid 'nickname' or 'password'!");
+            session.setAttribute("loginErrorMessage", "Error: Invalid 'nickname' or 'password'!");
             return false;
         }
     }
@@ -37,7 +37,23 @@ public class UserService {
             session.setAttribute("user", user);
             return true;
         } else {
-            session.setAttribute("registrationErrorMessage", "This 'nickname' is registered!");
+            session.setAttribute("registrationErrorMessage", "Error: This 'nickname' is registered!");
+            return false;
+        }
+    }
+
+    public boolean topUp(HttpServletRequest request) {
+        if (request.getParameter("money") == null) {
+            return false;
+        }
+
+        User user = (User) request.getSession().getAttribute("user");
+
+        if (userDAO.addToMoney(user, Float.parseFloat(request.getParameter("money")))) {
+            System.out.println("Succesfully top up!");
+            return true;
+        } else {
+            request.getSession().setAttribute("topUpErrorMessage", "Error: Balance is not changed!");
             return false;
         }
     }

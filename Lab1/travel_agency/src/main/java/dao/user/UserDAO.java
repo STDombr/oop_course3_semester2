@@ -48,4 +48,41 @@ public class UserDAO {
         }
         return Optional.empty();
     }
+
+    public Optional<Float> getMoney(String nickname) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(resourceBundle.getString("users.get_money"), Statement.RETURN_GENERATED_KEYS);
+
+            preparedStatement.setString(1, nickname);
+            ResultSet result = preparedStatement.executeQuery();
+            if (result.next()) {
+                return Optional.of(Converter.getMoneyFromResultSet(result));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return Optional.empty();
+    }
+
+    public boolean addToMoney(User user, Float popUpMoney) {
+        float money = getMoney(user.getNickname()).orElseThrow(() -> new RuntimeException("Cant find user money!"));
+
+        money += popUpMoney;
+
+        if (money >= 0) {
+
+            try {
+                PreparedStatement preparedStatement = connection.prepareStatement(resourceBundle.getString("users.update_money"), Statement.RETURN_GENERATED_KEYS);
+                preparedStatement.setFloat(1, money);
+                preparedStatement.setString(2, user.getNickname());
+                preparedStatement.executeUpdate();
+
+                user.setMoney(money);
+                return true;
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+        return false;
+    }
 }
