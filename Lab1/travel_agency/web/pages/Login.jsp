@@ -8,7 +8,7 @@
     <!-- Main CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css"/>
 </head>
-<body>
+<body class="body-green">
 <div class="login-page">
     <form class="form" method="post" action="${pageContext.request.contextPath}/login">
         <input type="text" name="nickname" placeholder="nickname" required>

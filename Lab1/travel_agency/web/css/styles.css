@@ -6,6 +6,12 @@
     margin: auto;
 }
 
+.top-up-page {
+    width: 500px;
+    padding: 8% 0 0;
+    margin: auto;
+}
+
 .travel-agency-page {
     width: 90%;
     height: 900px;
@@ -13,7 +19,9 @@
     margin: 10px;
 }
 
-.form {
+.login-page .form,
+.register-page .form,
+.top-up-page .form{
     z-index: 1;
     background: #FFFFFF;
     margin: 0 auto 100px;
@@ -22,7 +30,18 @@
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
-.form input {
+.order-page .form,
+.admin-page .form{
+    z-index: 1;
+    background: #FFFFFF;
+    text-align: center;
+}
+
+.login-page .form input,
+.register-page .form input,
+.top-up-page .form input,
+.admin-page .form input,
+textarea {
     font-family: "Roboto", sans-serif;
     outline: 0;
     background: #f2f2f2;
@@ -32,25 +51,43 @@
     padding: 15px;
     box-sizing: border-box;
     font-size: 14px;
+    text-align: center;
+}
+
+textarea {
+    height: 100px;
+}
+
+.order-page .form input[type="text"] {
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    border: 0;
+    width: 50px;
+    background: none;
+    text-align: right;
+    color: #FFFFFF;
+    box-sizing: border-box;
+    font-size: 14px;
 }
 
 .form button {
     font-family: "Roboto", sans-serif;
     text-transform: uppercase;
     outline: 0;
-    background: #4CAF50;
+    background: #9b9b9b;
+    font-weight: bold;
     width: 100%;
     border: 0;
     padding: 15px;
     color: #FFFFFF;
-    font-size: 14px;
+    font-size: 15px;
     -webkit-transition: all 0.3 ease;
     transition: all 0.3 ease;
     cursor: pointer;
 }
 
 .form button:hover,.form button:active,.form button:focus {
-    background: #43A047;
+    background: #544f4f;
 }
 
 .form .info {
@@ -76,12 +113,90 @@
 }
 
 body {
+    font-family: "Roboto", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.body-red {
+    background: #860000; /* fallback for old browsers */
+    background: -webkit-linear-gradient(right, #860000, #5b1212);
+    background: -moz-linear-gradient(right, #860000, #5b1212);
+    background: -o-linear-gradient(right, #860000, #5b1212);
+    background: linear-gradient(to left, #860000, #5b1212);"
+}
+
+.body-green {
     background: #76b852; /* fallback for old browsers */
     background: -webkit-linear-gradient(right, #76b852, #8DC26F);
     background: -moz-linear-gradient(right, #76b852, #8DC26F);
     background: -o-linear-gradient(right, #76b852, #8DC26F);
     background: linear-gradient(to left, #76b852, #8DC26F);
-    font-family: "Roboto", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+}
+
+.textarea {
+    width: 90%; /* Ширина поля в процентах */
+    height: 100px; /* Высота поля в пикселах */
+    resize: none; /* Запрещаем изменять размер */
+}
+
+.qty .count {
+    color: #000;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 30px;
+    padding: 0 2px
+;min-width: 35px;
+    text-align: center;
+}
+.qty .plus {
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: top;
+    color: white;
+    width: 30px;
+    height: 30px;
+    font: 30px/1 Arial,sans-serif;
+    text-align: center;
+    border-radius: 50%;
+}
+.qty .minus {
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: top;
+    color: white;
+    width: 30px;
+    height: 30px;
+    font: 30px/1 Arial,sans-serif;
+    text-align: center;
+    border-radius: 50%;
+    background-clip: padding-box;
+}
+.minus:hover{
+    background-color: #717fe0 !important;
+}
+.plus:hover{
+    background-color: #717fe0 !important;
+}
+/*Prevent text selection*/
+.qty span{
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+.qty input{
+    border: 0;
+    width: 2%;
+}
+.qty input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.settings {
+    font-size: 25px;
+    float: right;
+    margin-right: 20px;
 }
