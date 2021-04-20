@@ -20,17 +20,18 @@ public class LoginServlet extends HttpServlet {
     }
 
     private void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getSession().removeAttribute("loginErrorMessage");
+
         if (request.getParameter("nickname") != null) {
             if (userService.loginUser(request)) {
-                response.sendRedirect("home");
+                response.sendRedirect("list");
             } else {
                 request.getRequestDispatcher("pages/Login.jsp").forward(request, response);
             }
         } else {
             if (request.getSession().getAttribute("user") != null) {
-                response.sendRedirect("home");
+                response.sendRedirect("list");
             } else {
-                request.getSession().removeAttribute("loginErrorMessage");
                 request.getRequestDispatcher("pages/Login.jsp").forward(request, response);
             }
         }

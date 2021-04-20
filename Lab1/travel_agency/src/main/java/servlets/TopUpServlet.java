@@ -1,6 +1,6 @@
 package servlets;
 
-import service.TourService;
+import service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class TravelAgencyServlet extends HttpServlet {
-    private final TourService tourService = new TourService();
+public class TopUpServlet extends HttpServlet {
+    private final UserService userService = new UserService();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         process(request, response);
@@ -20,9 +20,14 @@ public class TravelAgencyServlet extends HttpServlet {
     }
 
     private void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getSession().removeAttribute("topUpErrorMessage");
+
         if (request.getSession().getAttribute("user") != null) {
-            tourService.getTours(request);
-            request.getRequestDispatcher("pages/TravelAgency.jsp").forward(request, response);
+            if (userService.topUp(request)) {
+                response.sendRedirect("list");
+            } else {
+                request.getRequestDispatcher("pages/TopUp.jsp").forward(request, response);
+            }
         } else {
             response.sendRedirect("logout");
         }

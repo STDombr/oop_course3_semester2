@@ -21,17 +21,18 @@ public class RegistrationServlet extends HttpServlet {
     }
 
     private void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getSession().removeAttribute("registrationErrorMessage");
+
         if (request.getParameter("nickname") != null) {
             if (userService.registerUser(request)) {
-                response.sendRedirect("home");
+                response.sendRedirect("list");
             } else {
                 request.getRequestDispatcher("pages/Registration.jsp").forward(request, response);
             }
         } else {
             if (request.getSession().getAttribute("user") != null) {
-                response.sendRedirect("home");
+                response.sendRedirect("list");
             } else {
-                request.getSession().removeAttribute("registrationErrorMessage");
                 request.getRequestDispatcher("pages/Registration.jsp").forward(request, response);
             }
         }
