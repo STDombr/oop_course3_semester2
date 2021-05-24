@@ -42,7 +42,7 @@
             <a class="nav-link" href="#">Pricing</a>
         </ul>
         <ul class="navbar-nav" style="width: 100%; justify-content: flex-end">
-            <a class="nav-link" href="${pageContext.request.contextPath}/topup">
+            <a class="nav-link" href="${pageContext.request.contextPath}/balance">
                 Balance:
                 <c:out value="${user.getMoney()}$"/>
             </a>
@@ -56,7 +56,7 @@
         <c:choose>
             <c:when test="${tour.getSale() == 0}">
                 <div class="ui-item br-blue">
-                    <form class="form" method="post" action="${pageContext.request.contextPath}/order">
+                    <form class="form" method="post" action="${pageContext.request.contextPath}/order/submit?id=${tour.getId()}">
                         <!-- NAME -->
                         <div>
                             <h1><c:out value="${tour.getTourType()} in ${tour.getName()}"/></h1>
@@ -92,7 +92,7 @@
 
             <c:otherwise>
                 <div class="ui-item br-red">
-                    <form class="form" method="post" action="${pageContext.request.contextPath}/order">
+                    <form class="form" method="post" action="${pageContext.request.contextPath}/order/submit?id=${tour.getId()}">
                         <!-- NAME -->
                         <div>
                             <h1>

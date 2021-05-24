@@ -43,7 +43,7 @@
             <a class="nav-link" href="#">Pricing</a>
         </ul>
         <ul class="navbar-nav" style="width: 100%; justify-content: flex-end">
-            <a class="nav-link" href="${pageContext.request.contextPath}/topup">
+            <a class="nav-link" href="${pageContext.request.contextPath}/balance">
                 Balance:
                 <c:out value="${user.getMoney()}$"/>
             </a>
@@ -53,7 +53,7 @@
 </nav>
 
 <div class="top-up-page">
-    <form class="form" method="post" action="${pageContext.request.contextPath}/topup">
+    <form class="form" method="post" action="${pageContext.request.contextPath}/balance/topup">
         <h2>Top up your balance</h2>
 
         <input type="number" name="money" step="0.1" min="0" value="0" required>

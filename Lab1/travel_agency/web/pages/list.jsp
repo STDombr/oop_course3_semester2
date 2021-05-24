@@ -39,7 +39,7 @@
             <a class="nav-link" href="#">Pricing</a>
         </ul>
         <ul class="navbar-nav" style="width: 100%; justify-content: flex-end">
-            <a class="nav-link" href="${pageContext.request.contextPath}/topup">
+            <a class="nav-link" href="${pageContext.request.contextPath}/balance">
                 Balance:
                 <c:out value="${user.getMoney()}$"/>
             </a>

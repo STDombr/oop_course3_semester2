@@ -50,7 +50,6 @@ public class UserService {
         User user = (User) request.getSession().getAttribute("user");
 
         if (userDAO.addToMoney(user, Float.parseFloat(request.getParameter("money")))) {
-            System.out.println("Succesfully top up!");
             return true;
         } else {
             request.getSession().setAttribute("topUpErrorMessage", "Error: Balance is not changed!");

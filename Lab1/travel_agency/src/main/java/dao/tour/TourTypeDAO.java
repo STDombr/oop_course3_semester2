@@ -1,7 +1,10 @@
 package dao.tour;
 
 import dao.Converter;
+import dao.user.UserDAO;
 import model.tour.TourType;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.LinkedList;
@@ -11,6 +14,7 @@ import java.util.ResourceBundle;
 public class TourTypeDAO {
     private final Connection connection;
     private final ResourceBundle resourceBundle = ResourceBundle.getBundle("sql");
+    private final static Logger logger = LogManager.getLogger(TourTypeDAO.class);
 
     public TourTypeDAO(Connection connection) {
         this.connection = connection;
@@ -28,8 +32,9 @@ public class TourTypeDAO {
                 list.add(tourType);
             }
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            logger.warn("Could not find tour types: {}", throwables.getMessage());
         }
+        logger.info("Tour types successfully found");
         return list;
     }
 

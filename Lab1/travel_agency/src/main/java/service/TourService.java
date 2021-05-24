@@ -6,11 +6,11 @@ import dao.tour.TourDAO;
 import dao.tour.TourTypeDAO;
 import model.country.Country;
 import model.tour.Tour;
+import model.tour.TourBuilder;
 import model.tour.TourType;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,7 +37,7 @@ public class TourService {
     public boolean getTourById(HttpServletRequest request) {
         int id = Integer.parseInt(Optional.ofNullable(request.getParameter("id")).orElse("0"));
 
-        if (id != 0) {
+        if (id > 0) {
             List<TourType> tourTypes = tourTypeDAO.getAllTourTypes();
             List<Country> countries = countryDAO.getAllCountries();
 
@@ -52,5 +52,39 @@ public class TourService {
             }
         }
         return false;
+    }
+
+    public boolean updateTour(HttpServletRequest request) {
+        int id = Integer.parseInt(Optional.ofNullable(request.getParameter("id")).orElse("0"));
+
+        if (id > 0) {
+            Tour tour = new TourBuilder()
+                    .setId(id)
+                    .setName(request.getParameter("name"))
+                    .setPrice(Float.parseFloat(request.getParameter("price")))
+                    .setDays(Integer.parseInt(request.getParameter("days")))
+                    .setInfo(request.getParameter("info"))
+                    .setSale(Integer.parseInt(request.getParameter("sale")))
+                    .build();
+
+            tourDAO.updateTourById(id, tour);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean newOrder(HttpServletRequest request) {
+        int id = Integer.parseInt(Optional.ofNullable(request.getParameter("id")).orElse("0"));
+
+        if (id > 0) {
+
+            System.out.println("Complete order");
+            //complete order
+
+            return true;
+        } else {
+            return false;
+        }
     }
 }

@@ -39,7 +39,7 @@
             <a class="nav-link" href="#">Pricing</a>
         </ul>
         <ul class="navbar-nav" style="width: 100%; justify-content: flex-end">
-            <a class="nav-link" href="${pageContext.request.contextPath}/topup">
+            <a class="nav-link" href="${pageContext.request.contextPath}/balance">
                 Balance:
                 <c:out value="${user.getMoney()}$"/>
             </a>
@@ -51,7 +51,7 @@
 <div class="admin-page ui-1">
     <div class="container">
         <div class="ui-item br-blue">
-            <form class="form" method="post" action="#update">
+            <form class="form" method="post" action="${pageContext.request.contextPath}/admin/update?id=${tour.getId()}">
 
                 <div>
                     <h2>Tour name</h2>
@@ -74,7 +74,7 @@
                     <input type="number" name="sale" step="1" min="0" max="100" value="${tour.getSale()}" required>
                 </div>
                 <!-- BUTTON -->
-                <button type="submit" class="btn btn-blue" value="topup">Update</button>
+                <button type="submit" class="btn btn-blue" value="update">Update</button>
             </form>
         </div>
 
