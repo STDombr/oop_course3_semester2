@@ -77,7 +77,7 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", nickname='" + nickname + '\'' +
+                ", nickname=" + nickname + '\'' +
                 '}';
     }
 }

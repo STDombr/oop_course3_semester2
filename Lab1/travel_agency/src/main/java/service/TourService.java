@@ -2,27 +2,39 @@ package service;
 
 import dao.FactoryDAO;
 import dao.country.CountryDAO;
+import dao.order.OrderDAO;
 import dao.tour.TourDAO;
 import dao.tour.TourTypeDAO;
+import dao.user.UserDAO;
 import model.country.Country;
+import model.order.Order;
 import model.tour.Tour;
 import model.tour.TourBuilder;
 import model.tour.TourType;
+import model.user.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.List;
-import java.util.Optional;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class TourService {
     private final TourDAO tourDAO;
     private final TourTypeDAO tourTypeDAO;
     private final CountryDAO countryDAO;
+    private final OrderDAO orderDAO;
+    private final UserDAO userDAO;
+    private final static Logger logger = LogManager.getLogger(TourService.class);
 
     public TourService() {
         this.tourDAO = FactoryDAO.createTourDao();
         this.tourTypeDAO = FactoryDAO.createTourTypeDao();
         this.countryDAO = FactoryDAO.createCountryDao();
+        this.orderDAO = FactoryDAO.createOrderDao();
+        this.userDAO = FactoryDAO.createUserDao();
     }
 
     public void getTours(HttpServletRequest request) {
@@ -45,7 +57,25 @@ public class TourService {
 
             Tour tour = tourDAO.getTourById(id, tourTypes, countries);
             if (tour.getId() == id) {
+                List<Order> orders = orderDAO.getOrderByTourId(tour.getId());
+                int count = 0;
+                for (int i = 0; i < orders.size(); i++) {
+                    try {
+                        Date date = new SimpleDateFormat("YYYY-MM-DD", Locale.ENGLISH).parse(orders.get(i).getDate());
+
+                        Calendar cal = Calendar.getInstance();
+                        cal.add(Calendar.DATE, -7);
+
+                        if (!date.after(cal.getTime())) {
+                            count++;
+                        }
+                    } catch (ParseException e) {
+                        logger.warn("Cound not parse order date: {}", e.getMessage());
+                    }
+                }
+                session.removeAttribute("ordersCount");
                 session.removeAttribute("tour");
+                session.setAttribute("ordersCount", count);
                 session.setAttribute("tour", tour);
 
                 return true;
@@ -79,12 +109,30 @@ public class TourService {
 
         if (id > 0) {
 
-            System.out.println("Complete order");
-            //complete order
+            User user = (User) request.getSession().getAttribute("user");
+            int count = Integer.parseInt(request.getParameter("count"));
+            Tour tour = (Tour) request.getSession().getAttribute("tour");
 
-            return true;
-        } else {
-            return false;
+            if (user.getMoney() >= (count * tour.getPrice() * (100 - tour.getSale())) / 100) {
+                orderDAO.insertOrder(id, user.getId(), count);
+                userDAO.addToMoney(user, (float) ((-1) * (count * tour.getPrice() * (100 - tour.getSale())) / 100));
+                return true;
+            }
+            logger.error("User don't have enough money");
         }
+
+        return false;
+    }
+
+    public void getOrderByUserId(HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("user");
+
+        List<Order> orders = orderDAO.getOrderByUserId(user.getId());
+        for (int i = 0; i < orders.size(); i++) {
+            orders.get(i).setName(tourDAO.getTourById(orders.get(i).getTourId(), null, null).getName());
+        }
+
+        HttpSession session = request.getSession();
+        session.setAttribute("orders", orders);
     }
 }

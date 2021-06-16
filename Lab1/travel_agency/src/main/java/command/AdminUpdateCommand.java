@@ -1,5 +1,6 @@
 package command;
 
+import model.tour.Tour;
 import model.user.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,7 +20,7 @@ public class AdminUpdateCommand extends Command {
             User admin = (User) request.getSession().getAttribute("user");
             if (admin.isAdmin()) {
                 if (!tourService.updateTour(request)) {
-                    return "redirect:/admin";
+                    return "redirect:/admin?id=" + ((Tour) request.getSession().getAttribute("tour")).getId();
                 } else {
                     logger.info("Tour " + request.getParameter("id") + "changed");
                     return "redirect:/list";

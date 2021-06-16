@@ -100,12 +100,12 @@ public class Tour {
     public String toString() {
         return "Tour{" +
                 "id=" + id +
-                ", tourType='" + tourType + '\'' +
-                ", name='" + name + '\'' +
+                ", tourType=" + tourType + '\'' +
+                ", name=" + name + '\'' +
                 ", price=" + price +
-                ", country='" + country + '\'' +
+                ", country=" + country + '\'' +
                 ", days=" + days +
-                ", info='" + info + '\'' +
+                ", info=" + info + '\'' +
                 ", sale=" + sale + "%" +
                 '}';
     }

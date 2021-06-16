@@ -90,15 +90,19 @@ public class TourDAO {
 
             ResultSet result = preparedStatement.executeQuery();
             if (result.next()) {
-                for (TourType tourType : tourTypes) {
-                    if (tourType.getId() == result.getInt("tour_type")) {
-                        tourTypeName = tourType.getName();
+                if (tourTypes != null) {
+                    for (TourType tourType : tourTypes) {
+                        if (tourType.getId() == result.getInt("tour_type")) {
+                            tourTypeName = tourType.getName();
+                        }
                     }
                 }
 
-                for (Country country : countries) {
-                    if (country.getId() == result.getInt("country")) {
-                        countryName = country.getName();
+                if (countries != null) {
+                    for (Country country : countries) {
+                        if (country.getId() == result.getInt("country")) {
+                            countryName = country.getName();
+                        }
                     }
                 }
 

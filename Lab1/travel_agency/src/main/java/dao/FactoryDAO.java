@@ -1,6 +1,7 @@
 package dao;
 
 import dao.country.CountryDAO;
+import dao.order.OrderDAO;
 import dao.tour.TourDAO;
 import dao.tour.TourTypeDAO;
 import dao.user.UserDAO;
@@ -12,6 +13,7 @@ public class FactoryDAO {
     private static TourDAO tourDAO = null;
     private static TourTypeDAO tourTypeDAO = null;
     private static CountryDAO countryDAO = null;
+    private static OrderDAO orderDAO = null;
 
     public static UserDAO createUserDao() {
         if (userDAO == null) {
@@ -39,5 +41,12 @@ public class FactoryDAO {
             countryDAO = new CountryDAO(connectionPool.getConnection());
         }
         return countryDAO;
+    }
+
+    public static OrderDAO createOrderDao() {
+        if (orderDAO == null) {
+            orderDAO = new OrderDAO((connectionPool.getConnection()));
+        }
+        return orderDAO;
     }
 }

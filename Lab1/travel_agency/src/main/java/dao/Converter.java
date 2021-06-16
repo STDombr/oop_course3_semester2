@@ -2,6 +2,8 @@ package dao;
 
 import model.country.Country;
 import model.country.CountryBuilder;
+import model.order.Order;
+import model.order.OrderBuilder;
 import model.tour.Tour;
 import model.tour.TourBuilder;
 import model.tour.TourType;
@@ -32,6 +34,15 @@ public class Converter {
                 .setDays(resultSet.getInt("days"))
                 .setInfo(resultSet.getString("info"))
                 .setSale(resultSet.getInt("sale"))
+                .build();
+    }
+
+    public static Order getOrderFromResultSet(ResultSet resultSet) throws SQLException {
+        return new OrderBuilder()
+                .setTourId(resultSet.getInt("tour_id"))
+                .setUserId(resultSet.getInt("user_id"))
+                .setCount(resultSet.getInt("count"))
+                .setDate(resultSet.getString("date"))
                 .build();
     }
 

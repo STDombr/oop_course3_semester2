@@ -15,6 +15,7 @@ public class CommandContainer {
         commands.put("/admin", new AdminCommand());
         commands.put("/admin/update", new AdminUpdateCommand());
         commands.put("/order", new OrderCommand());
+        commands.put("/orderList", new OrderListCommand());
         commands.put("/order/submit", new OrderSubmitCommand());
         commands.put("/balance", new BalanceCommand());
         commands.put("/balance/topup", new TopUpCommand());

@@ -4,14 +4,15 @@
 <head>
     <title>Top Up</title>
 
-    <!-- Styles -->
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css"/>
-    <!-- Style-1 CSS -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style-1.css"/>
-    <!-- Main CSS -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css"/>
-    <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+    <style>
+        <%@include file="../css/bootstrap.min.css" %>
+        <%@include file="../css/style-1.css" %>
+        <%@include file="../css/styles.css" %>
+    </style>
+
+    <script src="../js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="../js/jquery.min.js" type="text/javascript"></script>
+    <script src="../js/button-script.js" type="text/javascript"></script>
     <script>
         $("input[type='number']").inputSpinner();
     </script>
@@ -39,8 +40,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <a class="nav-link" href="${pageContext.request.contextPath}/list">List</a>
-            <a class="nav-link" href="#">Features</a>
-            <a class="nav-link" href="#">Pricing</a>
+            <a class="nav-link" href="${pageContext.request.contextPath}/orderList">Orders</a>
         </ul>
         <ul class="navbar-nav" style="width: 100%; justify-content: flex-end">
             <a class="nav-link" href="${pageContext.request.contextPath}/balance">

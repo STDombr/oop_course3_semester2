@@ -1,5 +1,6 @@
 package command;
 
+import model.tour.Tour;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import service.TourService;
@@ -16,9 +17,9 @@ public class OrderSubmitCommand extends Command {
 
         if (request.getSession().getAttribute("user") != null) {
             if (!tourService.newOrder(request)) {
-                return "redirect:/order";
+                return "redirect:/order?id=" + ((Tour) request.getSession().getAttribute("tour")).getId();
             } else {
-                logger.error("Tour id is invalid");
+                logger.error("Order is created");
                 return "redirect:/list";
             }
         } else {

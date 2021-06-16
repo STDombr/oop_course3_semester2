@@ -34,7 +34,7 @@ public class TourType {
     public String toString() {
         return "TourType{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", name=" + name + '\'' +
                 '}';
     }
 }

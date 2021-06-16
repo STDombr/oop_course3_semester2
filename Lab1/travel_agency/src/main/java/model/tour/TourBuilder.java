@@ -1,7 +1,5 @@
 package model.tour;
 
-import model.user.User;
-
 public class TourBuilder {
     private int id;
     private String tourType;

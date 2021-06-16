@@ -2,11 +2,16 @@
 <html>
 <head>
     <title>Registration</title>
-    <!-- Styles -->
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
-    <!-- Main CSS -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css"/>
+
+    <style>
+        <%@include file="../css/bootstrap.min.css" %>
+        <%@include file="../css/style-1.css" %>
+        <%@include file="../css/styles.css" %>
+    </style>
+
+    <script src="../js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="../js/jquery.min.js" type="text/javascript"></script>
+    <script src="../js/button-script.js" type="text/javascript"></script>
 </head>
 <body class="body-green">
 <div class="register-page">
